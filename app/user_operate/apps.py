@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class UserOperateConfig(AppConfig):
-    name = 'user_operate'
+    name = 'app.user_operate'
+    verbose_name = "操作管理"
