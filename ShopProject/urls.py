@@ -16,10 +16,14 @@ Including another URLconf
 import xadmin
 from django.contrib import admin
 from django.urls import path, include
+from django.views.static import serve
+
+from ShopProject.settings import MEDIA_ROOT
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     # 使用xadmin进行后台的管理
     path('xadmin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),
+    path('media/<path:path>',serve,{'document_root':MEDIA_ROOT}),
 ]

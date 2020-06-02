@@ -13,6 +13,7 @@ import django
 
 django.setup()
 
+# 注意：导入数据库模型，要先加载Django配置和注册Django app
 from app.goods.models import Goods, GoodsCategory, GoodsImage
 from app.extra_apps.db_tools.data.product_data import row_data
 
