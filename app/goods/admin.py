@@ -27,7 +27,7 @@ class GoodsAdmin(object):
         # 不显示的字段名称
         exclude = ["add_time"]
         # 控制初始表单数量,默认为3
-        extra = 1
+        extra = 3
         style = 'tab'
 
     inlines = [GoodsImagesInline]
