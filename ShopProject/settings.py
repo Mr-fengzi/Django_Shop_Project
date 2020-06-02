@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     # 给admin后台管理提供强大的回滚和恢复功能
     'reversion',
+    'rest_framework',
     # 注册子应用
     'app.users',
     'app.goods',

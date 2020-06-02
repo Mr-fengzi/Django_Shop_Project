@@ -17,9 +17,10 @@ import xadmin
 from django.contrib import admin
 from django.urls import path, include
 from django.views.static import serve
+from rest_framework.documentation import include_docs_urls
 
 from ShopProject.settings import MEDIA_ROOT
-from app.goods.views_base_django import GoodsListView
+from app.goods.views import GoodsListView
 from app.goods.views_serializer import GoodsListSerializerView
 
 urlpatterns = [
@@ -28,6 +29,11 @@ urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),
     path('media/<path:path>',serve,{'document_root':MEDIA_ROOT}),
-    path('goods1/',GoodsListView.as_view(),name='goods-list-django'),
-    path('goods2/',GoodsListSerializerView.as_view(),name='goods-list-serializer')
+    # path('goods1/',GoodsListView.as_view(),name='goods-list-django'),
+    # path('goods2/',GoodsListSerializerView.as_view(),name='goods-list-serializer'),
+    path('api-auth/',include('rest_framework.urls')),
+    # drf文档,title自定义, 如果要实现API文档页展示,需要在settings文件中配置。
+    path('docs', include_docs_urls(title='Young RESTful Docs')),
+    # 商品列表页, 删除前两种商品列表页的url配置.
+    path('goods/', GoodsListView.as_view(), name='goods-list-rest')
 ]
