@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.views.static import serve
 
 from ShopProject.settings import MEDIA_ROOT
+from app.goods.views_base_django import GoodsListView
+from app.goods.views_serializer import GoodsListSerializerView
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -26,4 +28,6 @@ urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),
     path('media/<path:path>',serve,{'document_root':MEDIA_ROOT}),
+    path('goods1/',GoodsListView.as_view(),name='goods-list-django'),
+    path('goods2/',GoodsListSerializerView.as_view(),name='goods-list-serializer')
 ]
