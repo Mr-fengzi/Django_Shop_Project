@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from app.goods.filters import GoodsFilter
-from app.goods.models import Goods
-from app.goods.serializers import GoodsSerializer
+from app.goods.models import Goods, GoodsCategory
+from app.goods.serializers import GoodsSerializer, CategorySerializer
 
 
 # class GoodsListView(APIView):
@@ -56,4 +56,16 @@ class GoodsListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
 
    # 排序
    ordering_fields = ('sold_num', 'add_time')
+
+
+class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                      viewsets.GenericViewSet):
+   '''
+   list:
+   商品分类列表数据
+   '''
+   # queryset = GoodsCategory.objects.all()
+   # 希望查询一级分类的信息
+   queryset = GoodsCategory.objects.filter(category_type = 1)
+   serializer_class = CategorySerializer
 

@@ -21,7 +21,7 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 
 from ShopProject.settings import MEDIA_ROOT
-from app.goods.views import GoodsListViewSet
+from app.goods.views import GoodsListViewSet, CategoryViewSet
 from app.goods.views_serializer import GoodsListSerializerView
 
 router = DefaultRouter()
@@ -33,6 +33,8 @@ router = DefaultRouter()
 ^goods/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='goods-detail']
 """
 router.register(r'goods', GoodsListViewSet, basename='goods')
+# 配置Category的url
+router.register(r'categorys', CategoryViewSet, basename="categorys")
 
 urlpatterns = [
     # path('admin/', admin.site.urls),

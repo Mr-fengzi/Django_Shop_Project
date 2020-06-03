@@ -10,11 +10,28 @@ from rest_framework import serializers
 from app.goods.models import Goods, GoodsCategory
 
 
+class CategorySerializer3(serializers.ModelSerializer):
+    """三级分类的序列化"""
+    class Meta:
+        model = GoodsCategory
+        fields = "__all__"
+
+class CategorySerializer2(serializers.ModelSerializer):
+    """二级分类的序列化"""
+    sub_cat = CategorySerializer3(many=True)
+
+    class Meta:
+        model = GoodsCategory
+        fields = "__all__"
+
 # ModelSerializer实现商品分类列表页(删除原有的代码)
 class CategorySerializer(serializers.ModelSerializer):
-   class Meta:
-       model = GoodsCategory
-       fields = "__all__"
+    """一级分类的序列化"""
+    sub_cat = CategorySerializer2(many = True)
+
+    class Meta:
+        model = GoodsCategory
+        fields = "__all__"
 
 class GoodsSerializer(serializers.ModelSerializer):
     #覆盖外键字段，不指定时，只显示分类的id
