@@ -43,7 +43,7 @@ class GoodsListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
   """
    # 分页
    pagination_class = GoodsPagination
-   queryset = Goods.objects.all()
+   queryset = Goods.objects.all().order_by('id')
    serializer_class = GoodsSerializer
 
    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
