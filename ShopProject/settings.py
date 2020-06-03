@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django_filters',
     # 自动生成API文档。
     'coreapi',
+    # DRF基于token令牌认证的应用
+    'rest_framework.authtoken',
     # 注册子应用
     'app.users',
     'app.goods',
@@ -153,6 +155,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # }
 
 REST_FRAMEWORK = {
-   # 指定用于支持coreapi的Schema
-   'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    # 指定用于支持coreapi的Schema
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 此身份验证方案使用HTTP基本身份验证,根据用户的用户名和密码进行签名。仅用于测试。
+        'rest_framework.authentication.BasicAuthentication',
+        # 此身份验证方案使用Django的默认会话后端进行身份验证。
+        'rest_framework.authentication.SessionAuthentication',
+        # 此身份验证方案使用基于令牌的简单HTTP身份验证方案。令牌认证适用于客户端 - 服务器设置。
+        'rest_framework.authentication.TokenAuthentication'
+    )
 }
