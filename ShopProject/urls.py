@@ -18,10 +18,21 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
+from rest_framework.routers import DefaultRouter
 
 from ShopProject.settings import MEDIA_ROOT
-from app.goods.views import GoodsListView
+from app.goods.views import GoodsListViewSet
 from app.goods.views_serializer import GoodsListSerializerView
+
+router = DefaultRouter()
+# 配置goods的url, 自动生成路由和视图函数的对应关系。
+"""
+^goods/$ [name='goods-list']
+^goods\.(?P<format>[a-z0-9]+)/?$ [name='goods-list']
+^goods/(?P<pk>[^/.]+)/$ [name='goods-detail']
+^goods/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='goods-detail']
+"""
+router.register(r'goods', GoodsListViewSet, basename='goods')
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -35,5 +46,8 @@ urlpatterns = [
     # drf文档,title自定义, 如果要实现API文档页展示,需要在settings文件中配置。
     path('docs', include_docs_urls(title='Young RESTful Docs')),
     # 商品列表页, 删除前两种商品列表页的url配置.
-    path('goods/', GoodsListView.as_view(), name='goods-list-rest')
+    # path('goods/', GoodsListView.as_view(), name='goods-list-rest')
 ]
+
+# 将DefaultRouter注册的路由和视图函数对应关系添加到urlpatterns里面。
+urlpatterns += router.urls
