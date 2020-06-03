@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     # 给admin后台管理提供强大的回滚和恢复功能
     'reversion',
     'rest_framework',
+    'django_filters',
+    # 自动生成API文档。
+    'coreapi',
     # 注册子应用
     'app.users',
     'app.goods',
@@ -141,3 +144,15 @@ AUTH_USER_MODEL = 'users.UserProfile'
 MEDIA_URL = "/media/"
 # 设置media的保存路径: media/hello.png
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# REST_FRAMEWORK = {
+#    #分页
+#    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#    #每页显示的个数
+#    'PAGE_SIZE': 10,
+# }
+
+REST_FRAMEWORK = {
+   # 指定用于支持coreapi的Schema
+   'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}

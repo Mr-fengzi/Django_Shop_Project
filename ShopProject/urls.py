@@ -44,7 +44,7 @@ urlpatterns = [
     # path('goods2/',GoodsListSerializerView.as_view(),name='goods-list-serializer'),
     path('api-auth/',include('rest_framework.urls')),
     # drf文档,title自定义, 如果要实现API文档页展示,需要在settings文件中配置。
-    path('docs', include_docs_urls(title='Young RESTful Docs')),
+    path('docs/', include_docs_urls(title='Young RESTful Docs')),
     # 商品列表页, 删除前两种商品列表页的url配置.
     # path('goods/', GoodsListView.as_view(), name='goods-list-rest')
 ]
