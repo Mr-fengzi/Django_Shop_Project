@@ -25,6 +25,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from ShopProject.settings import MEDIA_ROOT
 from app.goods.views import GoodsListViewSet, CategoryViewSet
 from app.goods.views_serializer import GoodsListSerializerView
+from app.trade.views import ShoppingCartViewset
 from app.user_operate.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 from app.users.views import SmsCodeViewset, UserViewset
 
@@ -53,6 +54,9 @@ router.register(r'messages', LeavingMessageViewset, basename="messages")
 
 # 配置收货地址
 router.register(r'address', AddressViewset, basename="address")
+
+# 配置购物车的url
+router.register(r'shopcarts', ShoppingCartViewset, basename="shopcarts")
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
