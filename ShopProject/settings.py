@@ -163,6 +163,20 @@ REST_FRAMEWORK = {
         # 此身份验证方案使用Django的默认会话后端进行身份验证。
         'rest_framework.authentication.SessionAuthentication',
         # 此身份验证方案使用基于令牌的简单HTTP身份验证方案。令牌认证适用于客户端 - 服务器设置。
-        'rest_framework.authentication.TokenAuthentication'
+        # 'rest_framework.authentication.TokenAuthentication'
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     )
 }
+
+import datetime
+JWT_AUTH={
+    #Token失效时间, 也可以设置seconds=20
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    #Token前缀
+    'JWT_AUTH_HEADER_PREFIX': 'JWT'
+}
+
+AUTHENTICATION_BACKENDS = (
+# 'django.contrib.auth.backends.ModelBackend',
+'app.users.views.CustomBackend',
+)

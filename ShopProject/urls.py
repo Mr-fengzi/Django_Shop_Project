@@ -20,6 +20,8 @@ from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
+
 from ShopProject.settings import MEDIA_ROOT
 from app.goods.views import GoodsListViewSet, CategoryViewSet
 from app.goods.views_serializer import GoodsListSerializerView
@@ -50,7 +52,9 @@ urlpatterns = [
     # 商品列表页, 删除前两种商品列表页的url配置.
     # path('goods/', GoodsListView.as_view(), name='goods-list-rest')
     # token
-    path('api-token-auth/', views.obtain_auth_token)
+    # path('api-token-auth/', views.obtain_auth_token)
+    # jwt的token认证接口
+    path('jwt-auth/', obtain_jwt_token )
 ]
 
 # 将DefaultRouter注册的路由和视图函数对应关系添加到urlpatterns里面。
