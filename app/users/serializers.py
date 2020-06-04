@@ -114,3 +114,13 @@ class UserRegSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'code', 'mobile', 'password')
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    """
+    用户详情
+    """
+    class Meta:
+        model = User
+        # 电话号码通过验证,不能任意修改.
+        fields = ("name", "gender", "birthday", "email")
