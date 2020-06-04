@@ -180,3 +180,11 @@ AUTHENTICATION_BACKENDS = (
 # 'django.contrib.auth.backends.ModelBackend',
 'app.users.views.CustomBackend',
 )
+
+# 正则验证手机号码,11位数字,1开头,第二位数必须是3456789这些数字之一
+# ^:以什么开头, $以什么结尾。 [3456789]字符集, 代表电话号码的第2位是3或者4或者....
+# \d: digit, 数值, \d{9}: 数值出现9次。
+REGEX_MOBILE = '^1[345789]\d{9}$'
+
+# 云片网APIKEY
+APIKEY = "61cd4256ebd9031803ef9b9e3a59dd43"
