@@ -4,8 +4,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from app.trade.models import ShoppingCart
-from app.trade.serializers import ShopCartSerializer, ShopCartDetailSerializer
+from app.trade.models import ShoppingCart, OrderInfo
+from app.trade.serializers import ShopCartSerializer, ShopCartDetailSerializer, OrderSerializer
 from app.users.permissions import IsUserOrReadOnly
 
 
@@ -34,3 +34,25 @@ class ShoppingCartViewset(viewsets.ModelViewSet):
             return ShopCartDetailSerializer
         else:
             return ShopCartSerializer
+
+
+class OrderViewset(viewsets.ModelViewSet):
+    """
+    订单管理
+    list:
+    获取个人订单
+    delete:
+    删除订单
+    create:
+    新增订单
+    """
+
+
+
+    permission_classes = (IsAuthenticated, IsUserOrReadOnly)
+    # authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
+    serializer_class = OrderSerializer
+
+    # 获取订单列表
+    def get_queryset(self):
+        return OrderInfo.objects.filter(user=self.request.user)
