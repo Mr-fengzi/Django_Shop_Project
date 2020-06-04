@@ -6,8 +6,9 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-from app.user_operate.models import UserFav, UserLeavingMessage
-from app.user_operate.serializers import UserFavSerializer, UserFavDetailSerializer, LeavingMessageSerializer
+from app.user_operate.models import UserFav, UserLeavingMessage, UserAddress
+from app.user_operate.serializers import UserFavSerializer, UserFavDetailSerializer, LeavingMessageSerializer, \
+    AddressSerializer
 from app.users.permissions import IsUserOrReadOnly
 
 
@@ -57,3 +58,28 @@ class LeavingMessageViewset(mixins.ListModelMixin, mixins.DestroyModelMixin,
     # 只能看到自己的留言
     def get_queryset(self):
         return UserLeavingMessage.objects.filter(user=self.request.user)
+
+
+class AddressViewset(viewsets.ModelViewSet):
+    """
+    收货地址管理
+    list:
+    获取收货地址
+    create:
+    添加收货地址
+    delete:
+    删除收货地址
+    update:
+    更新收货地址
+    """
+    # 判断是否有权限
+    permission_classes = (IsAuthenticated, IsUserOrReadOnly)
+    # 认证方式: token认证和session认证.
+    # authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
+
+    # 序列化类
+    serializer_class = AddressSerializer
+
+    # 指定查询集: 登录用户只能查看自己的收获地址
+    def get_queryset(self):
+        return UserAddress.objects.filter(user=self.request.user)
