@@ -25,6 +25,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from ShopProject.settings import MEDIA_ROOT
 from app.goods.views import GoodsListViewSet, CategoryViewSet
 from app.goods.views_serializer import GoodsListSerializerView
+from app.user_operate.views import UserFavViewset
 from app.users.views import SmsCodeViewset, UserViewset
 
 router = DefaultRouter()
@@ -41,8 +42,11 @@ router.register(r'categorys', CategoryViewSet, basename="categorys")
 
 # 配置codes的url
 router.register(r'code', SmsCodeViewset, basename="code")
-
+# 配置users的url
 router.register(r'users', UserViewset, basename="users")
+
+# 配置用户收藏的url
+router.register(r'userfavs', UserFavViewset, basename="userfavs")
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
