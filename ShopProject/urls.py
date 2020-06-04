@@ -25,7 +25,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from ShopProject.settings import MEDIA_ROOT
 from app.goods.views import GoodsListViewSet, CategoryViewSet
 from app.goods.views_serializer import GoodsListSerializerView
-from app.users.views import SmsCodeViewset
+from app.users.views import SmsCodeViewset, UserViewset
 
 router = DefaultRouter()
 # 配置goods的url, 自动生成路由和视图函数的对应关系。
@@ -41,6 +41,8 @@ router.register(r'categorys', CategoryViewSet, basename="categorys")
 
 # 配置codes的url
 router.register(r'code', SmsCodeViewset, basename="code")
+
+router.register(r'users', UserViewset, basename="users")
 
 urlpatterns = [
     # path('admin/', admin.site.urls),

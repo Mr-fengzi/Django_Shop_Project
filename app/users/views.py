@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from ShopProject.settings import APIKEY
 from app.users.models import VerifyCode
-from app.users.serializers import SmsSerializer
+from app.users.serializers import SmsSerializer, UserRegSerializer
 from app.users.sms import YunPian
 
 User = get_user_model()
@@ -61,3 +61,9 @@ class SmsCodeViewset(CreateModelMixin, viewsets.GenericViewSet):
             return Response({
                 "mobile": mobile
             }, status=status.HTTP_201_CREATED)
+
+class UserViewset(CreateModelMixin,viewsets.GenericViewSet):
+    '''
+    用户
+    '''
+    serializer_class = UserRegSerializer
