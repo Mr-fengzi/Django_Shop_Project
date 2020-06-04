@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from app.goods.models import Goods
 from app.goods.serializers import GoodsSerializer
-from app.trade.models import ShoppingCart, OrderInfo
+from app.trade.models import ShoppingCart, OrderInfo, OrderGoods
 
 
 class ShopCartSerializer(serializers.Serializer):
@@ -77,7 +77,7 @@ class OrderSerializer(serializers.ModelSerializer):
     trade_no = serializers.CharField(read_only=True)
     # 微信支付会用到
     nonce_str = serializers.CharField(read_only=True)
-    # 订单添加事件是只读的
+    # 订单添加时间是只读的
     add_time = serializers.DateTimeField(read_only=True)
     # 订单的金额是只读的
     order_mount = serializers.FloatField(read_only=True)
@@ -101,3 +101,28 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderInfo
         fields = "__all__"
+        
+        
+# 订单中的商品
+class OrderGoodsSerialzier(serializers.ModelSerializer):
+    goods = GoodsSerializer(many=False)
+
+    class Meta:
+        model = OrderGoods
+        fields = "__all__"
+
+# 订单商品信息
+# goods字段需要嵌套一个OrderGoodsSerializer
+class OrderDetailSerializer(serializers.ModelSerializer):
+    goods = OrderGoodsSerialzier(many=True)
+    class Meta:
+        model = OrderInfo
+        fields = "__all__"
+
+# 订单商品信息
+# goods字段需要嵌套一个OrderGoodsSerializer
+class OrderDetailSerializer(serializers.ModelSerializer):
+   goods = OrderGoodsSerialzier(many=True)
+   class Meta:
+       model = OrderInfo
+       fields = "__all__"
