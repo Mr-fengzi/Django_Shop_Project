@@ -1,6 +1,9 @@
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins, viewsets, filters
 from rest_framework.pagination import PageNumberPagination
@@ -56,6 +59,10 @@ class GoodsListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
 
    # 排序
    ordering_fields = ('sold_num', 'add_time')
+
+   # Cache requested url for each user for 2 hours
+   @method_decorator(cache_page(60 * 60 * 2))
+   @method_decorator(vary_on_cookie)
 
    def retrieve(self, request, *args, **kwargs):
       """重写retrieve方法"""

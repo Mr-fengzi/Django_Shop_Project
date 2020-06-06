@@ -180,7 +180,18 @@ REST_FRAMEWORK = {
         # 此身份验证方案使用基于令牌的简单HTTP身份验证方案。令牌认证适用于客户端 - 服务器设置。
         # 'rest_framework.authentication.TokenAuthentication'
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    )
+    ),
+    # 限速设置
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',  # 未登陆用户
+        'rest_framework.throttling.UserRateThrottle'  # 登陆用户
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        # 'anon': '3/minute',  # 每分钟可以请求3次
+        # 'user': '5/minute'  # 每分钟可以请求五次
+        'anon': '100/day',
+        'user': '1000/day'
+    }
 }
 
 import datetime
@@ -212,3 +223,17 @@ ali_pub_key_path = os.path.join(BASE_DIR, 'app/trade/keys/alipay_key.txt')
 
 # 支付宝沙箱环境买家测试帐号
 user = 'xrkjig1313@sandbox.com'
+
+# 跨域
+CORS_ORIGIN_ALLOW_ALL =True
+
+# Redis缓存的配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://118.190.210.92:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
