@@ -24,4 +24,4 @@ class GoodsFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Goods
         # 只需要在过滤器中增加“is_hot”, 在后台设置商品的“is_hot”为True,然后前端就可以显示出来了
-        fields = ['price_min', 'price_max', 'is_hot']
+        fields = ['price_min', 'price_max', 'is_hot', 'is_new']

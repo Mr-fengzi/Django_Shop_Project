@@ -7,7 +7,7 @@ from rest_framework import serializers
 #     goods_front_image = serializers.ImageField()
 
 #ModelSerializer实现商品列表页
-from app.goods.models import Goods, GoodsCategory, GoodsImage
+from app.goods.models import Goods, GoodsCategory, GoodsImage, Banner
 
 
 class CategorySerializer3(serializers.ModelSerializer):
@@ -51,4 +51,13 @@ class GoodsSerializer(serializers.ModelSerializer):
         model = Goods
         # fields = '__all__'  # 需要返回的字段， __all__是所有字段
         exclude = ['goods_desc', ]  # 不显示的字段属性
+
+
+class BannerSerializer(serializers.ModelSerializer):
+   '''
+  轮播图
+  '''
+   class Meta:
+       model = Banner
+       fields = "__all__"
 

@@ -23,7 +23,7 @@ from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
 from ShopProject.settings import MEDIA_ROOT
-from app.goods.views import GoodsListViewSet, CategoryViewSet
+from app.goods.views import GoodsListViewSet, CategoryViewSet, BannerViewset
 from app.goods.views_serializer import GoodsListSerializerView
 from app.trade.views import ShoppingCartViewset, OrderViewset, AlipayView
 from app.user_operate.views import UserFavViewset, LeavingMessageViewset, AddressViewset
@@ -60,6 +60,9 @@ router.register(r'shopcarts', ShoppingCartViewset, basename="shopcarts")
 
 # 配置订单的url
 router.register(r'orders', OrderViewset, basename="orders")
+
+# 配置首页轮播图的url
+router.register(r'banners', BannerViewset, basename="banners")
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
