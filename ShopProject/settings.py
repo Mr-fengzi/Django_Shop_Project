@@ -25,7 +25,9 @@ SECRET_KEY = 't!6$mg=0#c6yr&@vngen)4u@i2=1cq+)7^-u%gnbz&ok&sp#zg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+# 允许任意主机访问
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -91,10 +93,23 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ShopProject',
+        'USER': 'shopuser',
+        'PASSWORD': 'westos',
+        'HOST': '118.190.210.92',
+        'PORT': '3306',
+        # 这里引擎用innodb(默认myisam), 因为后面第三方登录时,要求引擎为INNODB
+        "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;"}
     }
 }
 
