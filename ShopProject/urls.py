@@ -25,7 +25,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from ShopProject.settings import MEDIA_ROOT
 from app.goods.views import GoodsListViewSet, CategoryViewSet
 from app.goods.views_serializer import GoodsListSerializerView
-from app.trade.views import ShoppingCartViewset, OrderViewset
+from app.trade.views import ShoppingCartViewset, OrderViewset, AlipayView
 from app.user_operate.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 from app.users.views import SmsCodeViewset, UserViewset
 
@@ -77,7 +77,9 @@ urlpatterns = [
     # token
     # path('api-token-auth/', views.obtain_auth_token)
     # jwt的token认证接口
-    path('jwt-auth/', obtain_jwt_token )
+    path('jwt-auth/', obtain_jwt_token ),
+    # 配置支付宝支付的url
+    path('alipay/return/', AlipayView.as_view()),
 ]
 
 # 将DefaultRouter注册的路由和视图函数对应关系添加到urlpatterns里面。

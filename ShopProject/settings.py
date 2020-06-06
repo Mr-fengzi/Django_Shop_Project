@@ -203,3 +203,12 @@ REGEX_MOBILE = '^1[345789]\d{9}$'
 
 # 云片网APIKEY
 APIKEY = "61cd4256ebd9031803ef9b9e3a59dd43"
+
+# 支付宝配置信息
+APPID = '2016102800774609'
+# 支付宝相关的key
+private_key_path = os.path.join(BASE_DIR, 'app/trade/keys/private_2048.txt')
+ali_pub_key_path = os.path.join(BASE_DIR, 'app/trade/keys/alipay_key.txt')
+
+# 支付宝沙箱环境买家测试帐号
+user = 'xrkjig1313@sandbox.com'
