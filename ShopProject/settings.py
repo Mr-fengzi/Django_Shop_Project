@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'coreapi',
     # DRF基于token令牌认证的应用
     'rest_framework.authtoken',
+    'coreschema',
     # 注册子应用
     'app.users',
     'app.goods',
@@ -59,6 +60,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 要放的尽可能靠前,必须在CsrfViewMiddleware之前。我们直接放在第一个位置就好了
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
